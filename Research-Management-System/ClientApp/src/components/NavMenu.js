@@ -1,47 +1,44 @@
-import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+const NavMenu = () => {
+  const [collapsed] = useState(true);
 
-  constructor (props) {
-    super(props);
+  // const toggleNavbar = () => {
+  //   setCollapsed(!collapsed);
+  // };
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
+  return (
+    <header>
+      <nav className="shadow-xl mb-3 bg-[#83c5be] fixed top-0 w-full" >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-3">
+            <h1 className="text-lg font-bold">Research Management System</h1>
+            <div className={`lg:flex lg:items-center ${collapsed ? 'hidden' : ''}`}>
+              <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+                <li className="nav-item">
+                  <Link to="/home" className="nav-link text-xl font-bold text-gray-800 hover:text-gray-600 px-3 py-2 border-r-2 border-gray-400">Home</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/counter" className="nav-link text-xl font-bold text-gray-800 hover:text-gray-600 px-3 py-2 border-r-2 border-gray-400">Counter</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/fetch-data" className="nav-link text-xl font-bold text-gray-800 hover:text-gray-600 px-3 py-2 border-r-2 border-gray-400">Fetch data</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link text-xl font-bold text-gray-800 hover:text-gray-600 px-3 py-2 border-r-2 border-gray-400">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="nav-link text-xl font-bold text-gray-800 hover:text-gray-600 px-3 py-2 border-r-2 border-gray-400">Register</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
 
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
+export default NavMenu;
 
-  render() {
-    return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-          <NavbarBrand tag={Link} to="/">Research_Management_System</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-            <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-              </NavItem>
-            </ul>
-          </Collapse>
-        </Navbar>
-      </header>
-    );
-  }
-}
